@@ -1,0 +1,16 @@
+
+CXXFLAGS= -std=c++11 -Wall -pedantic -pthread
+TEST_INPUT=testMonitor.hpp
+TEST_RUNNER= test_runner
+
+
+!cxx = |> g++ $(CXXFLAGS) -c %f -o %o |>
+!cxxtestgen = |> cxxtestgen --error-printer -o %o %f |>
+
+!o2bin = |> g++ $(CXXFLAGS) %f -o %o |>
+
+: $(TEST_INPUT) |> !cxxtestgen |> $(TEST_RUNNER).cpp
+: $(TEST_RUNNER).cpp  |> !cxx |> $(TEST_RUNNER).o
+
+: $(TEST_RUNNER).o |> !o2bin |> test_all_stuff
+

@@ -10,3 +10,7 @@
 *.lai
 *.la
 *.a
+
+*.swo
+*.swp
+.tup
